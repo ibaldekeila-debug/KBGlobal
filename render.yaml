@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: kbglobal-web
+    env: php
+    plan: free
+    runtime: php-8.2
+    buildCommand: composer install --no-dev --optimize-autoloader
+    startCommand: php -S 0.0.0.0:8080 -t public
+    healthCheckPath: /health
+    domains:
+      - yourapp.onrender.com
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: https://yourapp.onrender.com
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        fromService: kbglobal-db
+        value: ${SERVICE_HOST}
+      - key: DB_DATABASE
+        value: render_kbglobal
+      - key: DB_USERNAME
+        value: render_user
+      - key: DB_PASSWORD
+        fromSecret: DB_PASSWORD
+      - key: CACHE_DRIVER
+        value: file
+      - key: SESSION_DRIVER
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+
+  - type: database
+    name: kbglobal-db
+    plan: free
+    engine: mysql
+    version: "8.0"
+    databases:
+      - name: render_kbglobal
+        user: render_user
+        password: ${DB_PASSWORD}
