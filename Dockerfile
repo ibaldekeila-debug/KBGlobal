@@ -22,7 +22,8 @@ COPY . /var/www/html
 
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions storage/logs bootstrap/cache && \
+    chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 EXPOSE 8080
 
