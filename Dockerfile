@@ -27,4 +27,4 @@ RUN mkdir -p storage/framework/views storage/framework/cache storage/framework/s
 
 EXPOSE 8080
 
-CMD sh -c "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8080"
+CMD sh -c "echo \"APP_KEY=base64:NpLYWKPsxcxWE5W8SNlBVLY0kxxuLMcMFiVWG+Ve7xw=\" > .env && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8080"
