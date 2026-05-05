@@ -10,9 +10,10 @@ RUN apk add --no-cache \
     freetype-dev \
     zip \
     unzip \
-    nginx && \
+    nginx \
+    postgresql-dev && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+    docker-php-ext-install pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
