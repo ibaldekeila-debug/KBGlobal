@@ -5,8 +5,8 @@ services:
     plan: free
     runtime: php-8.2
     buildCommand: composer install --no-dev --optimize-autoloader
-    startCommand: php -S 0.0.0.0:8080 -t public
-    healthCheckPath: /health
+    startCommand: php artisan serve --host=0.0.0.0 --port=8080
+    healthCheckPath: /
     domains:
       - yourapp.onrender.com
     envVars:
