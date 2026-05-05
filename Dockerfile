@@ -11,6 +11,7 @@ RUN apk add --no-cache \
     zip \
     unzip \
     nginx \
+    oniguruma-dev \
     postgresql-dev && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
     docker-php-ext-install pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd
